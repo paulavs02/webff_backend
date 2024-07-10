@@ -1,0 +1,130 @@
+{% extends "plano/base.html"%}
+{% block title %}Proyecto copaFF24{% endblock %}
+
+{% block background %}{% load static %}{% static 'plano/img/home-bg.jpg' %} {% endblock %}
+
+{% block headers %}
+<h1>Copa free fire </h1>
+<span class="subheading">la batalla comienza...</span>
+{% endblock %} 
+
+
+{% block content %}
+    <!-- PERSONAJES -->
+    <div class="favs">
+        <h2 class="text-center">Los favoritos</h2>
+    </div>
+      <section id="personajes" class="mt-4 mb-4">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+
+            <div id="app">
+              <div v-if="error">Se produjo un error - Intente luego.</div>
+              <div v-else class="row">
+                <div v-for="elemento in datos" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <div class="charcard-img-container">
+                        <img :src="elemento.foto" :alt="elemento.nombre" class="card-img-top img-foto img-fluid">
+                        <img :src="elemento.icono" :alt="elemento.nombre" class="card-img-overlay img-icono img-fluid">
+                      </div>
+                      {% verbatim %}
+                        <div class="name">
+                          <h5 class="card-title">{{ elemento.nombre }}</h5>
+                        </div>
+                        <div class="details">
+                          <p :class="obtenerClaseModo(elemento.modo)">{{ elemento.modo }}</p>
+                          <p :class="obtenerClaseEstrategia(elemento.estrategia)">{{ elemento.estrategia }}</p>
+                          <p class="card-text">{{ elemento.habilidad }}</p>
+                          <p class="card-text">{{ elemento.detalle }}</p>
+                        </div>
+                      {% endverbatim %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+    <!-- /PERSONAJES -->
+    <!-- /FORMULARIO  -->
+    <section id="participar" class="container mt-4 mb-4">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <form class="contacto-formulario" id="formulario">
+              <!-- Modal -->
+               <div class="modal fade" id="modalInscripcion" tabindex="-1" aria-labelledby="modalInscripcionLabel" aria-hidden="true">
+                 <div class="modal-dialog">
+                   <div class="modal-content">
+                     <div class="modal-header">
+                      <h5 class="modal-title" id="modalInscripcionLabel">Inscripción exitosa</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                     <p>¡Tu inscripción al torneo ha sido aceptada! Pronto recibirás más información.</p>
+                    </div>
+                    <div class="modal-footer">
+                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /Modal -->
+  
+              <h5 class="mb-1 text-center">CONVIÉRTETE EN UN</h5>
+              <h2 class="mb-4 text-center">SOBREVIVIENTE</h2>
+              <h6 class="mb-3 text-center contacto-h6">Anotate con tu escuadra para hacer Booyah! </h6>
+              <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control mb-3" id="nombre" placeholder="Ingresa tu nombre" pattern="[A-Za-z]+" title="Solo letras" required>
+              </div>
+              <div class="form-group">
+                <label for="apellido">Apellido</label>
+                <input type="text" class="form-control mb-3" id="apellido" placeholder="Ingresa tu apellido" pattern="[A-Za-z]+" title="Solo letras" required>
+              </div>
+              <div class="form-group">
+                <label for="correo">E-mail</label>
+                <input type="email" class="form-control mb-3" id="correo" placeholder="Ingresa tu e-mail" required>
+              </div>
+              <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea class="form-control mb-3" id="mensaje" rows="4" placeholder="Dejanos el nombre de tu escuadra y los id de los integrantes" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="modo">En qué modo quieres participar?</label>
+                <select class="form-control mb-3" id="modo" name="modo" required>
+                  <option value="" disabled selected>Selecciona un modo</option>
+                  <option value="battle_royal">Battle Royal</option>
+                  <option value="duelo_escuadra">Duelo de Escuadra</option>
+                  <option value="ambos">Ambos</option>
+                </select>
+              </div> 
+              <div class="form-group">
+                <label for="imagen">Sube el escudo de tu escuadra</label>
+                <input type="file" class="form-control mb-3" id="imagen" name="imagen" accept="image/*" required>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                  <label class="form-check-label" for="invalidCheck">
+                    Leí y acepto las reglas del torneo.
+                  </label>
+                  <div class="invalid-feedback">
+                    Debes aceptar las reglas del torneo para participar.
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary" type="submit">Enviar</button>
+              </div>
+            </form>     
+          </div>
+        </div>
+      </section>
+      
+      <!-- /FORMULARIO -->
+{% endblock %}

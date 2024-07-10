@@ -1,0 +1,79 @@
+{% extends "plano/base.html"%}
+{% block title %} Fixture {% endblock %}
+{% block background %}{% load static %}{% static 'plano/img/fixture.jpg' %} {% endblock %}
+
+{% block headers %}
+<h1> Fixture </h1>
+<span class="subheading">Sigue a las mejores escuadras!</span>
+{% endblock %}
+
+{% block content %}
+
+<style>
+    .clasificados {
+        margin-top: 20px; 
+    }
+    .clasificados table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .clasificados table, .clasificados th, .clasificados td {
+        border: 1px solid rgba(188, 188, 188, 0.505);
+        padding: 10px;
+        text-align: left;
+    }
+    .clasificados img {
+        max-width: 100px;
+        max-height: 100px;
+    }
+    .squad {
+        display: flex; 
+        margin-bottom: 20px; 
+    }
+    .squad .img.avatar {
+        margin-right: 20px; 
+    }
+    .squad .img.avatar img {
+        width: 80px; 
+        height: 80px;
+        object-fit: cover; /* Ajuste para cubrir el tamaño */
+        border: 1px solid #ddd; /* Borde opcional para la imagen */
+        border-radius: 5px; /* Bordes redondeados para la imagen */
+    }
+    .squad .col-lg-7, .squad .col-md-8 {
+        flex: 1; /* Ocupa todo el espacio restante */
+    }
+    .squad h2 {
+        margin-top: 0; /* Elimina el margen superior predeterminado */
+        font-size: 20px; /* Tamaño de fuente para el nombre del equipo */
+    }
+    .squad p {
+        margin-bottom: 10px; /* Espacio inferior para el párrafo */
+    }
+</style>
+
+<div class="clasificados">
+    <h1>Listado de Escuadras</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Equipo</th>
+                <th>Avatar</th>
+                <th>Bajas</th>
+                <th>Puntos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for escuadra in escuadras %}
+            <tr>
+                <td>{{ escuadra.equipo }}</td>
+                <td><img src="{{ escuadra.avatar.url }}" alt="{{ escuadra.equipo }}"></td>
+                <td>{{ escuadra.kills }}</td>
+                <td>{{ escuadra.points }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
